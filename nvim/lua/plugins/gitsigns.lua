@@ -34,7 +34,5 @@ return {
         -- stylua: ignore end
       end,
     })
-
-    require("scrollbar.handlers.gitsigns").setup()
   end,
 }

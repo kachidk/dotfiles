@@ -1,7 +1,7 @@
 return {
   "kevinhwang91/nvim-hlslens",
   config = function()
-    require("scrollbar.handlers.search").setup({})
+    require("hlslens").setup()
 
     local kopts = { noremap = true, silent = true }
     vim.api.nvim_set_keymap(
