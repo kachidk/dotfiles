@@ -1,6 +1,6 @@
 # Victor's dotfiles
 
-## Create a Symbolic Link
+## How to create a symbolic link
 
 ### Powershell 7+ (Windows)
 
