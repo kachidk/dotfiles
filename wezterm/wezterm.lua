@@ -9,7 +9,7 @@ local config = {}
 local is_windows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 
 if is_windows then
-	config.default_prog = { "pwsh.exe", "-l" }
+	config.default_prog = { "pwsh.exe", "-NoLogo" }
 end
 
 -- Events
@@ -146,6 +146,27 @@ config.key_tables = {
 		{ key = "l", action = act.MoveTabRelative(1) },
 		{ key = "Escape", action = "PopKeyTable" },
 		{ key = "Enter", action = "PopKeyTable" },
+	},
+}
+
+config.mouse_bindings = {
+	-- Bind 'Up' event of CTRL-Click to open hyperlinks
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = act.OpenLinkAtMouseCursor,
+	},
+	-- Disable the 'Down' event of CTRL-Click to avoid weird program behaviors
+	{
+		event = { Down = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = act.Nop,
+	},
+	-- Change the default click behavior so that it only selects text
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "NONE",
+		action = act.CompleteSelection("ClipboardAndPrimarySelection"),
 	},
 }
 
