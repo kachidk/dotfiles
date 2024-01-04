@@ -40,9 +40,10 @@ end)
 config.font = wezterm.font_with_fallback({
 	{ family = "ComicShannsMono Nerd Font" },
 })
+config.font_size = 16
 config.use_fancy_tab_bar = true
 config.default_workspace = "default"
-config.color_scheme = "nord"
+config.color_scheme = "OneHalfDark"
 
 config.leader = { key = "a", mods = "CTRL" }
 config.keys = {
