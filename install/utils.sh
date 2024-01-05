@@ -45,12 +45,14 @@ create_link() {
   # Check if the target file or directory already exists
   # and check if it's a symlink then replace
   if [[ -e "$destination" && -L "$destination" ]]; then
-    ln -sfh "$source" "$destination"
-    print_warning "Replaced symlink $source >> $destination."
+    if ln -sfh "$source" "$destination"; then  # Command will throw error if unsuccessful
+      print_warning "Replaced symlink $source >> $destination."
+    fi
     return
   fi
 
   # Create the symlink
-  ln -sfh "$source" "$destination"
-  print_success "Created symlink $source >> $destination."
+  if ln -sfh "$source" "$destination"; then  # Command will throw error if unsuccessful
+    print_success "Created symlink $source >> $destination."
+  fi
 }

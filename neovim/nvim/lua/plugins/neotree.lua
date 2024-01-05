@@ -9,22 +9,15 @@ return {
   cmd = "Neotree",
   keys = {
     { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Explorer" },
-    { "<leader>gs", "<cmd>Neotree git_status toggle<cr>", desc = "Git status (NeoTree)" },
+    { "<leader>ge", "<cmd>Neotree git_status toggle<cr>", desc = "Git explorer" },
+    { "<leader>be", "<cmd>Neotree buffers toggle<cr>", desc = "Buffer explorer" },
   },
   config = function()
     local icons = require("core.icons")
 
     require("neo-tree").setup({
       close_if_last_window = true,
-      sources = { "filesystem", "git_status" },
-      source_selector = {
-        winbar = true,
-        content_layout = "center",
-        sources = {
-          { source = "filesystem", display_name = icons.FolderClosed .. " File" },
-          { source = "git_status", display_name = icons.Git .. " Git" },
-        },
-      },
+      sources = { "filesystem", "git_status", "buffers" },
       window = {
         mappings = {
           ["<space>"] = false,
