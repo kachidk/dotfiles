@@ -21,7 +21,7 @@ return {
       ["<leader>gh"] = { name = "Hunk" },
       ["<leader>gd"] = { name = "Diff" },
       ["<leader>u"] = { name = "UI/UX" },
-      ["<leader>s"] = { name = "Search" },
+      -- ["<leader>s"] = { name = "Search" },
       ["<leader>sn"] = { name = "Noice" },
       ["<leader>S"] = { name = "Session" },
     })
