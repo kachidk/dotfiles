@@ -18,9 +18,6 @@ return {
         null_ls.builtins.formatting.prettierd.with({
           extra_filetypes = { "toml", "php" },
         }),
-        null_ls.builtins.formatting.prettier.with({
-          filetypes = { "php" },
-        }),
         null_ls.builtins.formatting.stylua,
       },
       on_attach = function(client, bufnr)

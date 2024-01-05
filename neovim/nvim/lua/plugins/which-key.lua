@@ -8,6 +8,10 @@ return {
 
     which_key.register({
       mode = { "n", "v" },
+      ["g"] = { name = "Goto" },
+      ["gs"] = { name = "Surround" },
+      ["]"] = { name = "Next" },
+      ["["] = { name = "Prev" },
       ["<leader>b"] = { name = "Buffers" },
       ["<leader>d"] = { name = "Debug" },
       ["<leader>f"] = { name = "Find (Telescope)" },
@@ -21,7 +25,7 @@ return {
       ["<leader>gh"] = { name = "Hunk" },
       ["<leader>gd"] = { name = "Diff" },
       ["<leader>u"] = { name = "UI/UX" },
-      -- ["<leader>s"] = { name = "Search" },
+      ["<leader>s"] = { name = "Search" },
       ["<leader>sn"] = { name = "Noice" },
       ["<leader>S"] = { name = "Session" },
     })

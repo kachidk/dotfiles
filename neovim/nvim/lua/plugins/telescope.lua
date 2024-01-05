@@ -1,13 +1,14 @@
 return {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.2",
+  tag = "0.1.5",
   dependencies = {
+    "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-telescope/telescope-project.nvim",
   },
   cmd = "Telescope",
-  event = "Bufenter",
+  event = "BufEnter",
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
     { "<leader>fF", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find all files" },

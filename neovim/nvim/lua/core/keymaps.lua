@@ -1,9 +1,9 @@
 local utils = require("core.utils")
 
 local function map(mode, lhs, rhs, opts)
-	opts = opts or {}
-	opts.silent = opts.silent ~= false
-	vim.keymap.set(mode, lhs, rhs, opts)
+  opts = opts or {}
+  opts.silent = opts.silent ~= false
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 vim.g.mapleader = " "
@@ -42,10 +42,10 @@ map({ "t" }, "jk", "<c-\\><c-n>", { desc = "Escape terminal" })
 
 -- Clear search, diff update and redraw
 map(
-	"n",
-	"<leader>ur",
-	"<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-L><cr>",
-	{ desc = "Redraw / clear hlsearch / diff update" }
+  "n",
+  "<leader>ur",
+  "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-L><cr>",
+  { desc = "Redraw / clear hlsearch / diff update" }
 )
 
 -- Copy/paste with system clipboard
@@ -87,5 +87,5 @@ map("n", "<leader>n", "<cmd>ene<cr>", { desc = "New file" })
 
 -- Toggle options
 map("n", "<leader>uw", function()
-	utils.toggle_option("wrap")
+  utils.toggle_option("wrap")
 end, { desc = "Toggle Word Wrap" })
