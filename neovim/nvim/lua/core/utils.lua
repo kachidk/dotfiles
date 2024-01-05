@@ -11,23 +11,8 @@ M.toggle_option = function(option)
   end
 end
 
---- Get highlight properties for a given highlight name
----@param name string The highlight group name
----@param fallback? table The fallback highlight properties
----@return table properties The highlight group properties
-M.get_hlgroup = function(name, fallback)
-  if vim.fn.hlexists(name) == 1 then
-    local hl
-    hl = vim.api.nvim_get_hl(0, { name = name, link = false })
-    if not hl.fg then
-      hl.fg = "NONE"
-    end
-    if not hl.bg then
-      hl.bg = "NONE"
-    end
-    return hl
-  end
-  return fallback or {}
+M.is_windows = function()
+  return vim.fn.has("win32") == 1 and true or false
 end
 
 return M

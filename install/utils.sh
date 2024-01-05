@@ -37,12 +37,6 @@ create_link() {
   local destination="$2"
 
   # Check if the target file or directory already exists
-  # and check if it's not a symlink then backup
-  if [[ -e "$destination" && ! -L "$destination" ]]; then
-    backup "$destination"
-  fi
-
-  # Check if the target file or directory already exists
   # and check if it's a symlink then replace
   if [[ -e "$destination" && -L "$destination" ]]; then
     if ln -sfh "$source" "$destination"; then  # Command will throw error if unsuccessful
@@ -50,6 +44,15 @@ create_link() {
     fi
     return
   fi
+
+  # Check if the target file or directory already exists
+  # and check if it's not a symlink then backup
+  if [[ -e "$destination" && ! -L "$destination" ]]; then
+    backup "$destination"
+  fi
+
+  # Create directory if it doesn't exist
+  mkdir -p "$(dirname "$destination")"
 
   # Create the symlink
   if ln -sfh "$source" "$destination"; then  # Command will throw error if unsuccessful
