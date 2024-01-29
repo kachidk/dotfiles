@@ -7,32 +7,52 @@ local config = {}
 
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
 local is_windows = wezterm.target_triple == "x86_64-pc-windows-msvc"
+local is_macos_intel = wezterm.target_triple == "x86_64-apple-darwin"
+local is_macos_silicon = wezterm.target_triple == "aarch64-apple-darwin"
 
 if is_windows then
 	config.default_prog = { "pwsh.exe", "-NoLogo" }
 end
 
+if is_macos_intel or is_macos_silicon then
+	config.default_gui_startup_args = { "connect", "unix" }
+end
+
 -- Events
+local function basename(s)
+	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
 wezterm.on("format-window-title", function(tab, pane)
-	return string.gsub(pane.current_working_dir, "(.*[/\\])(.*)", "%2")
+	local cwd = pane.current_working_dir
+	return cwd and basename(cwd.file_path) or nil
 end)
 
 wezterm.on("format-tab-title", function(tab)
-	return tab.tab_index + 1 .. ": " .. string.gsub(tab.active_pane.current_working_dir, "(.*[/\\])(.*)", "%2")
+	local cwd = tab.active_pane.current_working_dir
+	return cwd and tab.tab_index + 1 .. ": " .. basename(cwd.file_path) or nil
+end)
+
+wezterm.on("gui-attached", function(domain)
+	-- maximize all displayed windows on startup
+	local workspace = mux.get_active_workspace()
+	for _, window in ipairs(mux.all_windows()) do
+		if window:get_workspace() == workspace then
+			window:gui_window():maximize()
+		end
+	end
 end)
 
 wezterm.on("update-right-status", function(window, pane)
-	local stat = window:active_workspace()
-	if window:active_key_table() then
-		stat = window:active_key_table()
-	end
-	if window:leader_is_active() then
-		stat = "LEADER"
-	end
+	local workspace = window:active_workspace()
+	local key_table = window:active_key_table()
+	local leader = window:leader_is_active() and "LEADER" or nil
+
 	window:set_right_status(wezterm.format({
 		{ Foreground = { Color = "#808080" } },
-		{ Text = nerdfonts.oct_table .. "   " .. stat },
-		{ Text = "   " },
+		{ Text = leader and leader .. " | " or "" },
+		{ Text = key_table and key_table .. " | " or "" },
+		{ Text = workspace and workspace .. " (workspace) " or "" },
 	}))
 end)
 
@@ -44,6 +64,7 @@ config.font_size = 16
 config.use_fancy_tab_bar = true
 config.default_workspace = "default"
 config.color_scheme = "OneHalfDark"
+config.unix_domains = { { name = "unix" } }
 
 config.leader = { key = "a", mods = "CTRL" }
 config.keys = {
