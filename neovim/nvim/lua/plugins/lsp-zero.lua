@@ -18,6 +18,8 @@ return {
   config = function()
     require("neodev").setup({ library = { plugins = false } })
 
+    local utils = require("core.utils")
+
     local lsp_zero = require("lsp-zero").preset({
       manage_nvim_cmp = {
         set_extra_mappings = true,
@@ -55,11 +57,11 @@ return {
       "tailwindcss",
       "tsserver",
       "cssls",
-      "intelephense",
+      utils.is_windows() and "intelephense" or "phpactor",
       "emmet_language_server",
     })
 
-    lsp_zero.skip_server_setup({ "tsserver" })
+    lsp_zero.skip_server_setup({ "tsserver", "intelephense", "phpactor" })
 
     local icons = require("core.icons")
     lsp_zero.set_sign_icons({
@@ -107,6 +109,15 @@ return {
         } },
       },
     })
+    if utils.is_windows() then
+      require("lspconfig").intelephense.setup({})
+    else
+      require("lspconfig").phpactor.setup({
+        init_options = {
+          ["language_server_worse_reflection.diagnostics.enable"] = false,
+        },
+      })
+    end
 
     lsp_zero.setup()
 

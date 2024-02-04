@@ -6,24 +6,32 @@ return {
     "nvim-telescope/telescope-file-browser.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-telescope/telescope-project.nvim",
+    "ahmedkhalf/project.nvim",
   },
   cmd = "Telescope",
   event = "BufEnter",
   keys = {
+    {
+      "<leader>e",
+      "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
+      desc = "File Browser (current file path)",
+    },
+    { "<leader>E", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
     { "<leader>fF", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find all files" },
     { "<leader><space>", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find all files" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
     { "<leader>,", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
-    { "<leader>fe", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
     {
-      "<leader>fE",
+      "<leader>fe",
       "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
       desc = "File Browser (current file path)",
     },
+    { "<leader>fE", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>f<cr>", "<cmd>Telescope resume<cr>", desc = "Resume" },
-    { "<leader>fp", "<cmd>Telescope project<cr>", desc = "Projects" },
+    { "<leader>fp", "<cmd>lua require'telescope'.extensions.projects.projects{}<cr>", desc = "Projects" },
+    { "<leader>fP", "<cmd>Telescope project<cr>", desc = "Projects (Base Directory)" },
     { "<leader>fw", "<cmd>Telescope live_grep<cr>", desc = "Find word" },
     {
       "<leader>fW",
@@ -36,6 +44,7 @@ return {
       end,
       desc = "Find words in all files",
     },
+    { "<leader>fg", "<cmd>Telescope grep_string<cr>", desc = "Find word under cursor" },
     { "<leader>f/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find word (current buffer)" },
     { "<leader>fc", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>fC", "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -47,17 +56,16 @@ return {
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Old files" },
     { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
     { "<leader>fm", "<cmd>Telescope man_pages<cr>", desc = "Man pages" },
+    { "<leader>ft", "<cmd>Telescope git_status<cr>", desc = "Git Status" },
   },
   config = function()
     require("telescope").setup({
       defaults = require("telescope.themes").get_dropdown({
-        file_ignore_patterns = {
-          ".git/*",
-        },
         prompt_prefix = " ",
         selection_caret = " ",
         path_display = { "smart" },
         sorting_strategy = "ascending",
+        initial_mode = "normal",
         layout_config = {
           horizontal = { prompt_position = "top", preview_width = 0.55 },
           center = { width = 0.8, height = 0.8 },
@@ -83,13 +91,19 @@ return {
           base_dirs = {
             "~/Projects",
           },
+          cd_scope = { "window" },
         },
       },
+    })
+
+    require("project_nvim").setup({
+      scope_chdir = "win",
     })
 
     local telescope = require("telescope")
     telescope.load_extension("file_browser")
     telescope.load_extension("project")
     telescope.load_extension("fzf")
+    telescope.load_extension("projects")
   end,
 }

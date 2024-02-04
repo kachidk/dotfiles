@@ -21,7 +21,6 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.fileignorecase = false
 vim.opt.wrap = false
 vim.opt.linebreak = true
-vim.opt.iskeyword:append("-")
 vim.opt.shortmess:append({ s = true, I = true })
 vim.opt.splitright = true
 vim.opt.splitbelow = true

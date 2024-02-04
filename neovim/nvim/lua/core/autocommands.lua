@@ -63,3 +63,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end,
 })
+
+-- two dollars on PHP variables: this can happen because of the `iskeyword` setting in VIM when working with LSP.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("add_dollar_to_iskeyword"),
+  pattern = { "php" },
+  callback = function()
+    vim.opt.iskeyword:append("$")
+  end,
+})

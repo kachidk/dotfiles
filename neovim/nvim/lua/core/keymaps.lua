@@ -54,18 +54,14 @@ map("n", "gp", '"+p', { desc = "Paste from system clipboard" })
 map("x", "gp", '"+P', { desc = "Paste from system clipboard" }) -- Paste in Visual with `P` to not copy selected text (`:h v_P`)
 
 -- Windows
-map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
-map("n", "<leader>wj", "<C-W>s", { desc = "Split window below", remap = true })
-map("n", "<leader>wl", "<C-W>v", { desc = "Split window right", remap = true })
+map("n", "<leader>wj", "<C-W>s", { desc = "Window split down", remap = true })
+map("n", "<leader>wl", "<C-W>v", { desc = "Window split right", remap = true })
 
 -- Tabs
-map("n", "<leader>tl", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader>tf", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader>tt", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader>wt", "<cmd>tabnew<cr>", { desc = "Tab new" })
+map("n", "<leader>wd", "<cmd>tabclose<cr>", { desc = "Tab close" })
+map("n", "[t", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "]t", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 
 -- Terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })

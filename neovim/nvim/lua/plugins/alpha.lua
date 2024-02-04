@@ -23,7 +23,7 @@ return {
       dashboard.button("f", " " .. " Find file", "<cmd>Telescope find_files<cr>"),
       dashboard.button("o", " " .. " Old files", "<cmd>Telescope oldfiles<cr>"),
       dashboard.button("w", " " .. " Find word", "<cmd>Telescope live_grep<cr>"),
-      dashboard.button("p", " " .. " Projects", "<cmd>Telescope project<cr>"),
+      dashboard.button("p", " " .. " Projects", "<cmd>lua require'telescope'.extensions.projects.projects{}<cr>"),
       dashboard.button("s", " " .. " Restore Session", "<cmd>lua require('persistence').load()<cr>"),
       dashboard.button("c", " " .. " Config", "<cmd>e $MYVIMRC<cr>"),
       dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy<cr>"),
