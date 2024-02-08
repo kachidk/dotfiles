@@ -2,7 +2,7 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
-local nerdfonts = wezterm.nerdfonts
+
 local config = {}
 
 -- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
@@ -49,7 +49,6 @@ wezterm.on("update-right-status", function(window, pane)
 	local leader = window:leader_is_active() and "LEADER" or nil
 
 	window:set_right_status(wezterm.format({
-		{ Foreground = { Color = "#808080" } },
 		{ Text = leader and leader .. " | " or "" },
 		{ Text = key_table and key_table .. " | " or "" },
 		{ Text = workspace and workspace .. " (workspace) " or "" },
