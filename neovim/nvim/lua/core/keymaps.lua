@@ -7,7 +7,6 @@ local function map(mode, lhs, rhs, opts)
 end
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
 
 -- Better up/down for i.e navigating wrapped lines
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -33,33 +32,19 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
-map({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor", remap = true })
+-- Escape
+map("i", "jj", "<esc>", { desc = "Escape insert" })
 
--- Clear search and escape
-map({ "i", "n", "v" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear search and escape" })
-map({ "i", "n", "v" }, "jk", "<cmd>noh<cr><esc>", { desc = "Clear search and escape" })
-map({ "t" }, "jk", "<c-\\><c-n>", { desc = "Escape terminal" })
-
--- Clear search, diff update and redraw
-map(
-  "n",
-  "<leader>ur",
-  "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-L><cr>",
-  { desc = "Redraw / clear hlsearch / diff update" }
-)
-
--- Copy/paste with system clipboard
-map({ "n", "x" }, "gy", '"+y', { desc = "Copy to system clipboard" })
-map("n", "gp", '"+p', { desc = "Paste from system clipboard" })
-map("x", "gp", '"+P', { desc = "Paste from system clipboard" }) -- Paste in Visual with `P` to not copy selected text (`:h v_P`)
+-- Clear search highlighting
+map("n", "<leader>h", "<cmd>noh<cr>", { desc = "No Highlight" })
 
 -- Windows
-map("n", "<leader>wj", "<C-W>s", { desc = "Window split down", remap = true })
-map("n", "<leader>wl", "<C-W>v", { desc = "Window split right", remap = true })
+map("n", "\\", "<C-W>s", { desc = "Window split down", remap = true })
+map("n", "|", "<C-W>v", { desc = "Window split right", remap = true })
 
 -- Tabs
-map("n", "<leader>wt", "<cmd>tabnew<cr>", { desc = "Tab new" })
-map("n", "<leader>wd", "<cmd>tabclose<cr>", { desc = "Tab close" })
+map("n", "<leader>N", "<cmd>tabnew<cr>", { desc = "New tab" })
+map("n", "<leader>C", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "[t", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "]t", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 
@@ -69,14 +54,16 @@ map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
 map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
 map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
-map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+
+-- Save
+map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
+
+-- Quit
+map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 
 -- Better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-
--- Save file
-map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- New file
 map("n", "<leader>n", "<cmd>ene<cr>", { desc = "New file" })

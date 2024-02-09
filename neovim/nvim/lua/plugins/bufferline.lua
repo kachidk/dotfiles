@@ -19,7 +19,7 @@ return {
     { "<leader>bq", "<cmd>BufferLinePickClose<cr>", desc = "Delete buffer from bufferline" },
     { "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", desc = "Delete all buffers except current" },
     -- stylua: ignore
-    { "<leader>x", function() require("mini.bufremove").delete() end, desc = "Close buffer" },
+    { "<leader>c", function() require("mini.bufremove").delete() end, desc = "Close buffer" },
   },
   config = function()
     local bufferline = require("bufferline")

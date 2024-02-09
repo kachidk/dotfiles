@@ -9,7 +9,7 @@ local logo = [[
 return {
   "goolord/alpha-nvim",
   keys = {
-    { "<leader>h", "<cmd>Alpha<cr>", desc = "Dashboard" },
+    { "<leader>;", "<cmd>Alpha<cr>", desc = "Dashboard" },
   },
   event = "VimEnter",
   config = function()

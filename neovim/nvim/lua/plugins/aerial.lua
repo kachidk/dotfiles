@@ -1,8 +1,8 @@
 return {
   "stevearc/aerial.nvim",
   keys = {
-    { "<leader>cs", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
-    { "<leader>cS", "<cmd>Telescope aerial<cr>", desc = "Aerial (Symbols) Telescope" },
+    { "<leader>ls", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
+    { "<leader>lS", "<cmd>Telescope aerial<cr>", desc = "Aerial (Symbols) Telescope" },
   },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",

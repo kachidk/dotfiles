@@ -5,7 +5,6 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    "nvim-telescope/telescope-project.nvim",
     "ahmedkhalf/project.nvim",
   },
   cmd = "Telescope",
@@ -17,21 +16,11 @@ return {
       desc = "File Browser (current file path)",
     },
     { "<leader>E", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-    { "<leader>fF", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find all files" },
-    { "<leader><space>", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find all files" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
+    { "<leader><space>", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find files" },
     { "<leader>,", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
-    {
-      "<leader>fe",
-      "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
-      desc = "File Browser (current file path)",
-    },
-    { "<leader>fE", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>f<cr>", "<cmd>Telescope resume<cr>", desc = "Resume" },
     { "<leader>fp", "<cmd>lua require'telescope'.extensions.projects.projects{}<cr>", desc = "Projects" },
-    { "<leader>fP", "<cmd>Telescope project<cr>", desc = "Projects (Base Directory)" },
     { "<leader>fw", "<cmd>Telescope live_grep<cr>", desc = "Find word" },
     {
       "<leader>fW",
@@ -65,7 +54,6 @@ return {
         selection_caret = " ",
         path_display = { "smart" },
         sorting_strategy = "ascending",
-        initial_mode = "normal",
         layout_config = {
           horizontal = { prompt_position = "top", preview_width = 0.55 },
           center = { width = 0.8, height = 0.8 },
@@ -87,12 +75,6 @@ return {
           hidden = true,
           respect_gitignore = false,
         },
-        project = {
-          base_dirs = {
-            "~/Projects",
-          },
-          cd_scope = { "window" },
-        },
       },
     })
 
@@ -102,7 +84,6 @@ return {
 
     local telescope = require("telescope")
     telescope.load_extension("file_browser")
-    telescope.load_extension("project")
     telescope.load_extension("fzf")
     telescope.load_extension("projects")
   end,

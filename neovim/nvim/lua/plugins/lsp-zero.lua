@@ -29,7 +29,6 @@ return {
     lsp_zero.on_attach(function(_, buffer)
       --stylua: ignore start
       local function map(mode, l, r, desc, buf) vim.keymap.set(mode, l, r, { desc = desc, buffer = buf }) end
-      map("n", "<leader>ctl", "<cmd>LspInfo<cr>", "Lsp Info", buffer)
       map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover", buffer)
       map("n", "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, "Goto Definition", buffer)
       map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration", buffer)
@@ -37,10 +36,10 @@ return {
       map("n", "go", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, "Goto Type Definition", buffer)
       map("n", "gr", function() require("telescope.builtin").lsp_references() end, "References", buffer)
       map("n", "gK", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help", buffer)
-      map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename", buffer)
-      map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", buffer)
+      map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename", buffer)
+      map("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", buffer)
       map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", "Line Diagnostics", buffer)
-      map("n", "<leader>cR", "<cmd>e<cr>", "Reload File", buffer)
+      map("n", "<leader>lR", "<cmd>e<cr>", "Reload File", buffer)
       map("n", "[d", function() vim.diagnostic.goto_prev() end, "Prev Diagnostic", buffer)
       map("n", "]d", function() vim.diagnostic.goto_next() end, "Next Diagnostic", buffer)
       map("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, "Prev Error", buffer)
@@ -49,7 +48,8 @@ return {
       map("n", "]w", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end, "Next Warning", buffer)
       --stylua: ignore end
     end)
-    vim.keymap.set("n", "<leader>cw", "<cmd>noautocmd w<cr>", { desc = "Save without formatting (noautocmd)" })
+    vim.keymap.set("n", "<leader>lw", "<cmd>noautocmd w<cr>", { desc = "Save without formatting (noautocmd)" })
+    vim.keymap.set("n", "<leader>pi", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
 
     lsp_zero.ensure_installed({
       "lua_ls",
@@ -77,6 +77,19 @@ return {
     vim.diagnostic.config({
       update_in_insert = true,
     })
+
+    -- fix: `No information available` on hover with multiple LSPs
+    local notify = vim.notify
+    local banned_messages = { "No information available" }
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.notify = function(msg, ...)
+      for _, banned in ipairs(banned_messages) do
+        if msg == banned then
+          return
+        end
+      end
+      return notify(msg, ...)
+    end
 
     require("lspconfig").lua_ls.setup({
       settings = {
