@@ -65,10 +65,10 @@ config.default_workspace = "default"
 config.color_scheme = "OneHalfDark"
 config.unix_domains = { { name = "unix" } }
 
-config.leader = { key = "a", mods = "CTRL" }
+config.leader = { key = "`" }
 config.keys = {
-	-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
-	{ key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) },
+	-- Send LEADER to the terminal when pressing LEADER twice
+	{ key = "`", mods = "LEADER", action = act.SendKey({ key = "`" }) },
 
 	-- Splits
 	{ key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
@@ -84,7 +84,7 @@ config.keys = {
 	{ key = "r", mods = "LEADER", action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false }) },
 
 	-- Close Pane
-	{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
+	{ key = "d", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
 
 	-- Zoom Pane
 	{ key = "%", mods = "LEADER|SHIFT", action = act.TogglePaneZoomState },
@@ -117,7 +117,7 @@ config.keys = {
 	{ key = "m", mods = "LEADER", action = act.ActivateKeyTable({ name = "move_tab", one_shot = false }) },
 
 	-- Close Tab
-	{ key = "d", mods = "LEADER", action = act.CloseCurrentTab({ confirm = false }) },
+	{ key = "q", mods = "LEADER", action = act.CloseCurrentTab({ confirm = false }) },
 
 	-- New Window
 	{ key = "N", mods = "LEADER", action = act.SpawnWindow },

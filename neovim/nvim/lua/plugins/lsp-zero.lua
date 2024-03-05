@@ -59,6 +59,7 @@ return {
       "cssls",
       utils.is_windows() and "intelephense" or "phpactor",
       "emmet_language_server",
+      "prismals",
     })
 
     lsp_zero.skip_server_setup({ "tsserver", "intelephense", "phpactor" })

@@ -35,6 +35,7 @@ return {
         "scss",
         "json",
         "php",
+        "prisma",
       },
     })
   end,

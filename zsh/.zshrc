@@ -19,3 +19,12 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+emulator_android(){
+  avd=$(emulator -list-avds 2>&1 | head -n 1)
+  command emulator -avd "$avd"
+}
+
+emulator_ios(){
+  command open -a simulator 
+}

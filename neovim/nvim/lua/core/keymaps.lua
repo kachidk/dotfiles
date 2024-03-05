@@ -34,6 +34,7 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Escape
 map("i", "jj", "<esc>", { desc = "Escape insert" })
+map("i", "jk", "<esc>", { desc = "Escape insert" })
 
 -- Clear search highlighting
 map("n", "<leader>h", "<cmd>noh<cr>", { desc = "No Highlight" })
@@ -49,7 +50,6 @@ map("n", "[t", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "]t", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 
 -- Terminal
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
 map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
 map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
@@ -68,7 +68,7 @@ map("v", ">", ">gv")
 -- New file
 map("n", "<leader>n", "<cmd>ene<cr>", { desc = "New file" })
 
--- Toggle options
+-- Toggle word wrap
 map("n", "<leader>uw", function()
   utils.toggle_option("wrap")
 end, { desc = "Toggle Word Wrap" })
