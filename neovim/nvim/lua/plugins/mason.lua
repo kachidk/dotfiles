@@ -1,29 +1,40 @@
+-- Customize Mason plugins
+
+---@type LazySpec
 return {
-  "williamboman/mason.nvim",
-  cmd = "Mason",
-  keys = { { "<leader>pm", "<cmd>Mason<cr>", desc = "Mason" } },
-  build = ":MasonUpdate",
-  opts = {
-    ensure_installed = {
-      "prettierd",
-      "stylua",
-    },
+  -- use mason-lspconfig to configure LSP installations
+  {
+    "williamboman/mason-lspconfig.nvim",
+    -- overrides `require("mason-lspconfig").setup(...)`
+    opts = function(_, opts)
+      -- add more things to the ensure_installed table protecting against community packs modifying it
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+        "lua_ls",
+        "phpactor",
+      })
+    end,
   },
-  config = function(_, opts)
-    require("mason").setup(opts)
-    local mr = require("mason-registry")
-    local function ensure_installed()
-      for _, tool in ipairs(opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
-        end
-      end
-    end
-    if mr.refresh then
-      mr.refresh(ensure_installed)
-    else
-      ensure_installed()
-    end
-  end,
+  -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
+  {
+    "jay-babu/mason-null-ls.nvim",
+    -- overrides `require("mason-null-ls").setup(...)`
+    opts = function(_, opts)
+      -- add more things to the ensure_installed table protecting against community packs modifying it
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+        -- "prettier",
+        "stylua",
+        "prettierd",
+      })
+    end,
+  },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    -- overrides `require("mason-nvim-dap").setup(...)`
+    opts = function(_, opts)
+      -- add more things to the ensure_installed table protecting against community packs modifying it
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+        -- "python",
+      })
+    end,
+  },
 }
