@@ -62,7 +62,7 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 16
 config.use_fancy_tab_bar = true
 config.default_workspace = "default"
-config.color_scheme = "Gruvbox Material (Gogh)"
+config.color_scheme = "OneHalfDark"
 config.unix_domains = { { name = "unix" } }
 
 config.leader = { key = "`" }

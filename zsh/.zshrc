@@ -28,3 +28,13 @@ emulator_android(){
 emulator_ios(){
   command open -a simulator 
 }
+
+# pnpm
+export PNPM_HOME="/Users/Victor/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
