@@ -3,7 +3,6 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
   -- import/override with your plugins folder
-  { import = "astrocommunity.editing-support.cutlass-nvim" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.prisma" },
   { import = "astrocommunity.pack.vue" },
@@ -16,4 +15,5 @@ return {
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.editing-support.multicursors-nvim" },
   { import = "astrocommunity.file-explorer.oil-nvim" },
+  { import = "astrocommunity.pack.php" },
 }

@@ -23,7 +23,7 @@ local function basename(s)
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
 
-wezterm.on("format-window-title", function(tab, pane)
+wezterm.on("format-window-title", function(_, pane)
 	local cwd = pane.current_working_dir
 	return cwd and basename(cwd.file_path) or nil
 end)
@@ -33,7 +33,7 @@ wezterm.on("format-tab-title", function(tab)
 	return cwd and tab.tab_index + 1 .. ": " .. basename(cwd.file_path) or nil
 end)
 
-wezterm.on("gui-attached", function(domain)
+wezterm.on("gui-attached", function()
 	-- maximize all displayed windows on startup
 	local workspace = mux.get_active_workspace()
 	for _, window in ipairs(mux.all_windows()) do
@@ -47,11 +47,13 @@ wezterm.on("update-right-status", function(window, pane)
 	local workspace = window:active_workspace()
 	local key_table = window:active_key_table()
 	local leader = window:leader_is_active() and "LEADER" or nil
+	local panes = pane:tab() and pane:tab():panes() or {}
 
 	window:set_right_status(wezterm.format({
+		{ Text = #panes > 1 and "(" .. #panes .. ")" .. " | " or "" },
 		{ Text = leader and leader .. " | " or "" },
 		{ Text = key_table and key_table .. " | " or "" },
-		{ Text = workspace and workspace .. " (workspace) " or "" },
+		{ Text = workspace and workspace .. " workspace " or "" },
 	}))
 end)
 
@@ -87,7 +89,7 @@ config.keys = {
 	{ key = "d", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
 
 	-- Zoom Pane
-	{ key = "%", mods = "LEADER|SHIFT", action = act.TogglePaneZoomState },
+	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
 
 	-- Search
 	{ key = "s", mods = "LEADER", action = act.Search({ CaseInSensitiveString = "" }) },

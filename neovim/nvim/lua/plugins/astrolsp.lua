@@ -46,6 +46,16 @@ return {
           ["language_server_worse_reflection.diagnostics.enable"] = false,
         },
       },
+      volar = {
+        init_options = {
+          vue = {
+            hybridMode = false,
+          },
+          typescript = {
+            tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
