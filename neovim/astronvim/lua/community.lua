@@ -14,6 +14,6 @@ return {
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.editing-support.multicursors-nvim" },
-  { import = "astrocommunity.file-explorer.oil-nvim" },
   { import = "astrocommunity.pack.php" },
+  { import = "astrocommunity.project.nvim-spectre" },
 }

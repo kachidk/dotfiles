@@ -26,6 +26,27 @@ return {
     opts = function(_, opts)
       -- add more things to the ensure_installed table protecting against community packs modifying it
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {})
+
+      opts.handlers = {
+        php = function()
+          local dap = require "dap"
+
+          dap.adapters.php = {
+            type = "executable",
+            command = "node",
+            args = { os.getenv "HOME" .. "/vscode-php-debug/out/phpDebug.js" },
+          }
+
+          dap.configurations.php = {
+            {
+              type = "php",
+              request = "launch",
+              name = "Listen for Xdebug",
+              port = 9003,
+            },
+          }
+        end,
+      }
     end,
   },
 }

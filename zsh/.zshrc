@@ -38,3 +38,39 @@ esac
 
 # set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
+
+alias rr="ranger"
+
+alias phpstorm='open -na "PhpStorm.app" --args'
+
+alias webstorm='open -na "WebStorm.app" --args'
+
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+
+eval $(thefuck --alias)
+eval $(thefuck --alias fk)
+
+alias yt-dlp='yt-dlp --output "~/Downloads/%(title)s.%(ext)s"'
+alias vl='yt-dlp'
+alias pl='yt-dlp --output "~/Downloads/%(playlist_title)s/%(playlist_index)s-%(title)s.%(ext)s"'
+
+export PATH="$HOME/.local/bin:$PATH"
+
+get_pocketbase() {
+  local version=${1:-0.22.16}
+  local folder_name=${2:-pocketbase}
+  local url="https://github.com/pocketbase/pocketbase/releases/download/v${version}/pocketbase_${version}_darwin_amd64.zip"
+  local temp_dir=$(mktemp -d)
+  
+  wget -O "$temp_dir/pocketbase.zip" "$url" && \
+  unzip "$temp_dir/pocketbase.zip" -d "$temp_dir" && \
+  mkdir -p "$folder_name" && \
+  mv "$temp_dir/pocketbase" "$folder_name/"
+  
+  rm -rf "$temp_dir"
+  echo "PocketBase binary has been saved to the $folder_name folder."
+}
+
+alias lvim='NVIM_APPNAME=lazyvim nvim'
