@@ -59,9 +59,10 @@ end)
 
 -- Settings
 config.font = wezterm.font_with_fallback({
-	{ family = "ComicShannsMono Nerd Font" },
+	{ family = "ComicShannsMono Nerd Font Mono" },
+	{ family = "iMWritingMono Nerd Font Mono" },
 })
-config.font_size = 16
+config.font_size = 17
 config.use_fancy_tab_bar = true
 config.default_workspace = "default"
 config.color_scheme = "OneHalfDark"
