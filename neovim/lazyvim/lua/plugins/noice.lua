@@ -6,5 +6,11 @@ return {
         silent = true,
       },
     },
+    cmdline = {
+      enabled = false,
+    },
+    messages = {
+      enabled = false,
+    },
   },
 }
