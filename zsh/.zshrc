@@ -73,8 +73,6 @@ get_pocketbase() {
   echo "PocketBase binary has been saved to the $folder_name folder."
 }
 
-alias nvim='NVIM_APPNAME=lazyvim nvim'
-
 alias lvim='NVIM_APPNAME=lazyvim nvim'
 
 alias avim='NVIM_APPNAME=astronvim nvim'
