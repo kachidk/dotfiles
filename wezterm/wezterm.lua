@@ -58,17 +58,21 @@ wezterm.on("update-right-status", function(window, pane)
 end)
 
 -- Settings
-config.font = wezterm.font_with_fallback({
-	{ family = "ComicShannsMono Nerd Font Mono" },
-	{ family = "iMWritingMono Nerd Font Mono" },
-})
+local font = "ComicShannsMono Nerd Font Mono"
+config.font = wezterm.font(font)
 config.font_size = 17
 config.use_fancy_tab_bar = true
 config.default_workspace = "default"
 config.color_scheme = "OneHalfDark"
-config.unix_domains = { { name = "unix" } }
+config.unix_domains = {
+	{ name = "unix" },
+}
+config.window_frame = {
+	font = wezterm.font(font),
+}
 
-config.leader = { key = "`" }
+config.leader = { key = "`", timeout_milliseconds = 2000 }
+
 config.keys = {
 	-- Send LEADER to the terminal when pressing LEADER twice
 	{ key = "`", mods = "LEADER", action = act.SendKey({ key = "`" }) },
@@ -152,6 +156,32 @@ config.keys = {
 
 	-- Show Launcher Menu
 	{ key = "p", mods = "LEADER", action = act.ShowLauncher },
+
+	-- Maximize window
+	{
+		key = "f",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window)
+			window:maximize()
+		end),
+	},
+
+	-- Restore window
+	{
+		key = "F",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window)
+			window:restore()
+		end),
+	},
+
+	-- Font size
+	{ key = "i", mods = "LEADER", action = act.ActivateKeyTable({ name = "font_size", one_shot = false }) },
+
+	-- Disable keymaps
+	{ key = "-", mods = "CTRL", action = act.DisableDefaultAssignment },
+	{ key = "=", mods = "CTRL", action = act.DisableDefaultAssignment },
+	{ key = "0", mods = "CTRL", action = act.DisableDefaultAssignment },
 }
 
 config.key_tables = {
@@ -168,6 +198,15 @@ config.key_tables = {
 		{ key = "j", action = act.MoveTabRelative(-1) },
 		{ key = "k", action = act.MoveTabRelative(1) },
 		{ key = "l", action = act.MoveTabRelative(1) },
+		{ key = "Escape", action = "PopKeyTable" },
+		{ key = "Enter", action = "PopKeyTable" },
+	},
+	font_size = {
+		{ key = "h", action = act.DecreaseFontSize },
+		{ key = "j", action = act.DecreaseFontSize },
+		{ key = "k", action = act.IncreaseFontSize },
+		{ key = "l", action = act.IncreaseFontSize },
+		{ key = "i", action = act.ResetFontSize },
 		{ key = "Escape", action = "PopKeyTable" },
 		{ key = "Enter", action = "PopKeyTable" },
 	},
