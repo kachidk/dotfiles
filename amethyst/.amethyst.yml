@@ -1,0 +1,12 @@
+layouts:
+  - tall
+  - fullscreen
+  - wide
+
+mod1:
+  - option
+  - shift
+  - control
+  - command
+
+window-max-count: 2
