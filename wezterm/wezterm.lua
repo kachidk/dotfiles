@@ -53,7 +53,7 @@ wezterm.on("update-right-status", function(window, pane)
 		{ Text = #panes > 1 and "(" .. #panes .. ")" .. " | " or "" },
 		{ Text = leader and leader .. " | " or "" },
 		{ Text = key_table and key_table .. " | " or "" },
-		{ Text = workspace and workspace .. " workspace " or "" },
+		{ Text = workspace and wezterm.nerdfonts.oct_table .. " " .. workspace .. " workspace " or "" },
 	}))
 end)
 

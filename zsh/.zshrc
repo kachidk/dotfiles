@@ -59,7 +59,7 @@ alias pl='yt-dlp --output "~/Downloads/%(playlist_title)s/%(playlist_index)s-%(t
 export PATH="$HOME/.local/bin:$PATH"
 
 get_pocketbase() {
-  local version=${1:-0.22.16}
+  local version=${1:-0.22.18}
   local folder_name=${2:-pocketbase}
   local url="https://github.com/pocketbase/pocketbase/releases/download/v${version}/pocketbase_${version}_darwin_amd64.zip"
   local temp_dir=$(mktemp -d)
@@ -76,3 +76,5 @@ get_pocketbase() {
 alias lvim='NVIM_APPNAME=lazyvim nvim'
 
 alias avim='NVIM_APPNAME=astronvim nvim'
+
+export PATH="$HOME/go/bin:$PATH"
