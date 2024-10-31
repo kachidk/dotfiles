@@ -78,8 +78,8 @@ config.keys = {
 	{ key = "`", mods = "LEADER", action = act.SendKey({ key = "`" }) },
 
 	-- Splits
-	{ key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	{ key = "\\", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "|", mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
 	-- Move between Panes
 	{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
